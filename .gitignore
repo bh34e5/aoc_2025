@@ -1,0 +1,8 @@
+.DS_Store/
+build/
+
+.ccls
+template.cc
+
+sample.txt
+input.txt
