@@ -40,7 +40,7 @@ struct Splitter {
     usize idx;
 
     bool next(Str *pstr) {
-        usize res_idx;
+        usize res_idx = 0;
         bool found = false;
 
         while (this->idx < this->str.len) {
@@ -53,8 +53,10 @@ struct Splitter {
             }
         }
 
-        if (this->last_idx < this->idx) {
+        if (!found && this->idx == this->str.len &&
+            this->last_idx < this->str.len) {
             found = true;
+            res_idx = this->str.len;
         }
 
         if (found) {
