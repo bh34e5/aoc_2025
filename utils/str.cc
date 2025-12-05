@@ -6,9 +6,9 @@
 
 struct Str {
     usize len;
-    char const *ptr;
+    char *ptr;
 
-    char operator[](usize idx) {
+    char &operator[](usize idx) {
         assert(idx < this->len && "Out of bounds");
         return this->ptr[idx];
     }
