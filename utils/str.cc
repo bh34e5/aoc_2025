@@ -31,6 +31,12 @@ struct Str {
 
         return res;
     }
+
+    char *begin() { return this->ptr; }
+    char *end() { return this->ptr + this->len; }
+
+    char const *cbegin() const { return this->ptr; }
+    char const *cend() const { return this->ptr + this->len; }
 };
 
 struct Splitter {

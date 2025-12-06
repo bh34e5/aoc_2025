@@ -18,11 +18,24 @@ Arena fromBuffer(char *buf, usize buf_len) {
     return res;
 }
 
-template <typename T> T *push(Arena *arena) {
-    assert(arena->size + sizeof(T) <= arena->capacity);
+void *pushSize(Arena *arena, usize size) {
+    assert(arena->size + size <= arena->capacity);
 
-    T *res = (T *)(void *)((char *)arena->data + arena->size);
-    arena->size += sizeof(T);
+    void *res = (char *)arena->data + arena->size;
+    arena->size += size;
 
     return res;
+}
+
+template <typename T> T *push(Arena *arena) {
+    void *res = pushSize(arena, sizeof(T));
+    return (T *)res;
+}
+
+template <typename T> T *pushArr(Arena *arena, usize count) {
+    void *res = nullptr;
+    if (count > 0) {
+        res = pushSize(arena, count * sizeof(T));
+    }
+    return (T *)res;
 }
