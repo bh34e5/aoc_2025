@@ -2,6 +2,7 @@
 build/
 
 .ccls
+.ccls-cache/
 template.cc
 
 sample.txt
