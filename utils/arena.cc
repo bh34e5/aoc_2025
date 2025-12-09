@@ -2,7 +2,8 @@
 
 #include "types.cc"
 
-#include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 struct Arena {
     void *data;
@@ -19,7 +20,13 @@ Arena fromBuffer(char *buf, usize buf_len) {
 }
 
 void *pushSize(Arena *arena, usize size) {
-    assert(arena->size + size <= arena->capacity);
+    if (arena->size + size > arena->capacity) {
+        fprintf(stderr,
+                "Allocation failed. Requested %zu bytes, but only have %zu "
+                "bytes remaining\n",
+                size, arena->capacity);
+        exit(1);
+    }
 
     void *res = (char *)arena->data + arena->size;
     arena->size += size;
