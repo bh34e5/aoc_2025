@@ -69,7 +69,9 @@ struct Splitter {
             usize start = this->last_idx;
             this->last_idx = res_idx + 1;
 
-            *pstr = this->str.slice(start, res_idx);
+            if (pstr != nullptr) {
+                *pstr = this->str.slice(start, res_idx);
+            }
         }
 
         return found;
