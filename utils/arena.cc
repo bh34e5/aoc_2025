@@ -24,7 +24,7 @@ void *pushSize(Arena *arena, usize size) {
         fprintf(stderr,
                 "Allocation failed. Requested %zu bytes, but only have %zu "
                 "bytes remaining\n",
-                size, arena->capacity);
+                size, arena->capacity - arena->size);
         exit(1);
     }
 
